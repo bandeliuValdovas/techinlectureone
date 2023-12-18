@@ -1,13 +1,23 @@
 package lt.techin.lectureone.controller;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import lt.techin.lectureone.service.UserService;
+import modal.request.User;
+import org.springframework.web.bind.annotation.*;
 
 @RestController()
+@RequiredArgsConstructor
 public class UserConroller {
+
+    private UserService userService;
+
+//    public UserConroller(UserService userService) {
+//        this.userService = userService;
+//    }
+
+
+
 
     @GetMapping
     public Object getUser() {
@@ -28,6 +38,13 @@ public class UserConroller {
         return input;
     }
 
+
+    @PostMapping("/body")
+    public User tryPassBody(
+            @RequestBody User body
+    ){
+        return userService.capitalizeName(body);
+    }
 
 
 
